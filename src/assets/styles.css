@@ -1,3 +1,5 @@
+/* src/assets/styles.css */
+
 :root {
   --bg: #121212;
   --surface: #1e1e1e;
@@ -7,8 +9,10 @@
   --muted: #bbb;
   --accent: #03dac6;
   --radius: 4px;
+  --header-height: 60px;
 }
 
+/* Reset + box-sizing */
 *,
 *::before,
 *::after {
@@ -19,89 +23,80 @@
 
 html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
 }
 
 body {
+  min-height: 100vh;
+  padding-top: var(--header-height); /* empurra todo conteúdo abaixo do header */
   background: var(--bg);
   color: var(--text);
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
 }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
+/* Container centralizado */
 .container {
   width: 90%;
   max-width: 1024px;
   margin: 0 auto;
 }
 
-/* Header */
+/* Header fixo */
 .site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-height);
   background: var(--surface);
   border-bottom: 1px solid #333;
+  z-index: 1000;
 }
 
 .header-inner {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0;
+  padding: 0 1rem;
 }
 
-.logo {
+.logo a {
   color: var(--primary);
+  text-decoration: none;
   font-size: 1.5rem;
 }
 
+/* Navegação principal em roxo */
 .nav-list {
   list-style: none;
   display: flex;
   gap: 1rem;
 }
+.nav-list a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
 
-/* Perfil */
+/* Dropdown de perfil */
 .profile-menu {
   position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 .profile-btn {
-  background: transparent;
+  background: none;
   border: none;
   color: var(--text);
   cursor: pointer;
   font-size: 0.9rem;
-  order: 1;
 }
-
 .profile-pic {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  order: 2;
 }
-
-/* Dropdown */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -110,43 +105,38 @@ a:hover {
   background: var(--surface);
   border: 1px solid #333;
   border-radius: var(--radius);
-  min-width: 160px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  flex-direction: column;
+  z-index: 1001;
 }
-
+.dropdown-content.show {
+  display: flex;
+}
 .dropdown-content a {
-  display: block;
   padding: 0.5rem 1rem;
   color: var(--text);
-  font-size: 0.9rem;
+  white-space: nowrap;
 }
-
 .dropdown-content a:hover {
   background: #2a2a2a;
 }
 
-.dropdown-content.show {
-  display: block;
-}
-
-/* Hero */
+/* Hero/banner */
 .hero {
   padding: 4rem 0;
   text-align: center;
 }
-
 .hero h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
+/* Formulário de busca */
 .search-form {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
-
 .search-form input {
   padding: 0.5rem 1rem;
   border: none;
@@ -154,7 +144,6 @@ a:hover {
   width: 300px;
   max-width: 100%;
 }
-
 .search-form button {
   background: var(--primary);
   border: none;
@@ -164,37 +153,20 @@ a:hover {
   cursor: pointer;
 }
 
-/* Catálogo */
+/* Catálogo de livros */
 .catalog {
   padding: 2rem 0;
 }
-
 .catalog h2 {
   margin-bottom: 1rem;
 }
-
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   gap: 1rem;
 }
-.more-card {
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius);
-}
 
-/* Botão com a seta */
-.more-btn {
-  background: transparent;
-  border: none;
-  color: var(--accent);
-  font-size: 2rem;
-  cursor: pointer;
-}
-
+/* Card de livro */
 .book-card {
   background: var(--surface);
   border-radius: var(--radius);
@@ -202,67 +174,82 @@ a:hover {
   display: flex;
   flex-direction: column;
 }
-
 .book-card img {
   width: 100%;
   display: block;
 }
-
 .book-info {
   padding: 0.5rem;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .book-info h3 {
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
-
 .book-info .author {
   font-size: 0.875rem;
   color: var(--muted);
   margin-bottom: 0.5rem;
 }
-
 .book-info .price {
   margin-top: auto;
   font-weight: bold;
 }
 
+/* Botões gerais em roxo */
 .btn {
   display: inline-block;
-  margin-top: 0.5rem;
-  background: var(--accent);
+  background: var(--primary);
   color: var(--on-primary);
-  padding: 0.5rem;
-  text-align: center;
+  padding: 0.5rem 1rem;
+  border: none;
   border-radius: var(--radius);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.btn:hover {
+  opacity: 0.9;
 }
 
-/* Formulário de venda */
+/* “Mais” no catálogo */
+.more-card {
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+.more-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Seção de venda */
 .sell-book {
   padding: 2rem 0;
   background: var(--surface);
 }
-
 .sell-book h2 {
   margin-bottom: 1rem;
 }
-
 .sell-form {
   display: grid;
   gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
 }
-
 .sell-form label {
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
 }
-
 .sell-form input {
   margin-top: 0.25rem;
   padding: 0.5rem;
@@ -271,7 +258,6 @@ a:hover {
   background: #2a2a2a;
   color: var(--text);
 }
-
 .sell-form button {
   background: var(--primary);
   border: none;
@@ -282,30 +268,29 @@ a:hover {
   font-size: 1rem;
 }
 
-/* Footer */
-.site-footer {
-  background: var(--surface);
-  padding: 1.5rem 0;
-  text-align: center;
-  margin-top: 2rem;
+/* Contato “rodapé” flexível */
+.contact-section {
+	margin-top: auto;
+	background: var(--surface);
+	padding: 2rem 1rem;
+	text-align: center;
+}
+.contact-section h2,
+.contact-section p {
+  color: var(--primary);
 }
 
-.site-footer .contact h3 {
-  color: var(--accent);
-  margin-bottom: 0.5rem;
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.site-footer p {
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-
-/* Responsividade */
+/* Responsividade básica */
 @media (max-width: 600px) {
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
   }
   .nav-list {
     flex-direction: column;
@@ -313,5 +298,8 @@ a:hover {
   }
   .search-form {
     flex-direction: column;
+  }
+  .book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
   }
 }

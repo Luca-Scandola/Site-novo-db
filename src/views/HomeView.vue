@@ -1,7 +1,5 @@
 <template>
-
-<body>
-  <main>
+  <section>
     <section id="home" class="hero">
       <div class="container">
         <h2>Encontre livros usados a preços acessíveis</h2>
@@ -61,9 +59,8 @@
       </article>
     </div>
   </div>
+  
 </section>
-
-
     <section id="vender" class="sell-book">
       <div class="container">
         <h2>Vender seu livro</h2>
@@ -76,19 +73,7 @@
         </form>
       </div>
     </section>
-  </main>
-
-  <footer id="contato" class="site-footer">
-    <div class="container">
-      <div class="contact">
-        <h3>Contato</h3>
-        <p>Email: suporte@bookshare.com.br</p>
-      </div>
-      <p>© 2025 BookShare. Todos os direitos reservados.</p>
-    </div>
-  </footer>
-</body>
-
+  </section>
 </template>
 
 <script>
@@ -96,9 +81,3 @@ export default {
 	name: 'HomeView'
 }
 </script>
-
-
-
-<style scoped>
-
-</style>

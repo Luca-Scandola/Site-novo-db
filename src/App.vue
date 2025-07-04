@@ -1,14 +1,21 @@
+<!-- src/App.vue -->
 <template>
   <div id="app">
     <HeaderNav/>
-    <router-view/>
+
+    <div class="content">
+      <router-view/>
+    </div>
+
+    <ContactSection/>
   </div>
 </template>
 
 <script>
-import HeaderNav from '@/components/HeaderNav.vue'
+import HeaderNav     from '@/components/HeaderNav.vue'
+import ContactSection from '@/components/ContactSection.vue'
 
 export default {
-  components: { HeaderNav }
+  components: { HeaderNav, ContactSection }
 }
 </script>
