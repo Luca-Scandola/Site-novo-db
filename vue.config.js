@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/Site-Projeto-2/'
+    ? '/Site-novo-db/'
     : '/'
 }
