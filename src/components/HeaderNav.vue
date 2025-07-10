@@ -10,10 +10,8 @@
         <ul class="nav-list">
           <li><router-link to="/">Início</router-link></li>
           <li><router-link to="/recomendacoes">Recomendações</router-link></li>
-
           <li v-if="!isAuth"><router-link to="/login">Entrar</router-link></li>
           <li v-if="!isAuth"><router-link to="/register">Cadastrar</router-link></li>
-
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
@@ -33,44 +31,42 @@
   </header>
 </template>
 
-<script>
-import { ref, computed } from 'vue'
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 
-export default {
-  name: 'HeaderNav',
-  setup() {
-    const open   = ref(false)
-    const router = useRouter()
+const open = ref(false)
+const user = ref(JSON.parse(localStorage.getItem('user') || 'null'))
+const router = useRouter()
 
-    // usuário logado salvo em localStorage como { id, nome, email }
-    const user     = computed(() => {
-      try {
-        return JSON.parse(localStorage.getItem('user')) || {}
-      } catch {
-        return {}
-      }
-    })
-    const userName = computed(() => user.value.nome || '')
+const isAuth   = computed(() => !!user.value?.id)
+const userName = computed(() => user.value?.nome || '')
 
-    const isAuth = computed(() => !!user.value.id)
-
-    const toggle = () => {
-      open.value = !open.value
-    }
-
-    const doLogout = () => {
-      localStorage.removeItem('user')
-      router.push('/login')
-    }
-
-    return {
-      open,
-      isAuth,
-      userName,
-      toggle,
-      doLogout
-    }
-  }
+function toggle() {
+  open.value = !open.value
 }
+
+function doLogout() {
+  localStorage.removeItem('user')
+  window.dispatchEvent(new Event('logout'))
+  router.push('/login')
+}
+
+function onLogin() {
+  user.value = JSON.parse(localStorage.getItem('user') || 'null')
+}
+
+function onLogout() {
+  user.value = null
+}
+
+onMounted(() => {
+  window.addEventListener('login', onLogin)
+  window.addEventListener('logout', onLogout)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('login', onLogin)
+  window.removeEventListener('logout', onLogout)
+})
 </script>

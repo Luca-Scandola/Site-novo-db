@@ -23,6 +23,7 @@ export default {
       try {
         const res = await login(this.form)
         localStorage.setItem('user', JSON.stringify(res.data))
+		window.dispatchEvent(new Event('login'))
         this.$router.push('/')
       } catch (e) {
         this.error = e.response?.data?.error || 'Falha no login'

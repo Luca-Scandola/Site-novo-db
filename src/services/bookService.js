@@ -1,6 +1,6 @@
 import axios from 'axios'
 const API = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL || 'http://localhost:3000/api/books'
+  baseURL: process.env.VUE_APP_BASE_URL || 'http://localhost:3000/books'
 })
 
 export const fetchBooks = () => API.get('/')
