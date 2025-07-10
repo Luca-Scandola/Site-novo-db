@@ -6,7 +6,5 @@
 </template>
 
 <script>
-export default {
-  name: 'NegociacoesView'
-}
+export default { name: 'NegociacoesView' }
 </script>

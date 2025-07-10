@@ -1,4 +1,3 @@
-<!-- src/components/ContactSection.vue -->
 <template>
   <section id="contato" class="contact-section">
     <div class="container">
